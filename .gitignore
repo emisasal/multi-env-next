@@ -25,7 +25,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+# (needs to be uploaded for this project to work)
+# .env*.local
 
 # vercel
 .vercel
