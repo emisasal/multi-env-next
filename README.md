@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Next.Js 13.5 with multiple enviroment variables
 
-## Getting Started
+In this example I'm using 3 enviroments:
 
-First, run the development server:
+- development
+- staging
+- production
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+I'm using the dependency `dotenv-cli` to import the env files in the execution of the scripts.
+For example, for production I'm using: `dotenv -e .env.prod next build`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The first env file is `.env.local`.
+Here you should store the secrets that will be server side only.
+This env file will load in all the enviroments before the other env files.
+You can also store public variables (starting with "NEXT*PUBLIC*") but they will be exposed in client side components.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Development
 
-## Learn More
+For development I'm using `.env.dev` variable.
+But you can use the Next.Js default `.env.development`. In that case there's no need to load the env file at the script.
+In this example I changed the name just to be shure it works.
 
-To learn more about Next.js, take a look at the following resources:
+## Staging
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Basically Staging is the same as Production, but used for testing and QA purposes.
+This is the challenging part of multiple env files because Next only considers 3 enviroments (development, production and test).
+Like in development it will load `.env.local` first followed by `.en.staging` (declared with dotenv-cli in the script for staging).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Production
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For production, as in development, you can't use `.env.production` because it will load in staging also.
+I'm using `.env.prod` for this example.
+The rest works like in staging.
