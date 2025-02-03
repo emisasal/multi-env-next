@@ -1,4 +1,4 @@
-# Next.Js 13.5 with multiple enviroment variables
+# Next.Js 14.2 with multiple enviroment variables
 
 In this project I'm using 3 enviroments:
 
